@@ -3,43 +3,55 @@ import time
 timeDate = time.time()
 yearDate = time.strftime("%Y", time.localtime(timeDate))
 
-def year():
-    while True:
-        year_int = int(input('请输入年：'))
-        if year_int in range(1980, int(yearDate)+1):
-            return year_int
+
+
+first_six = ['610524']
+
+
+# 输入年份，并判断是否是闰年，并且从1984年开始到现在，输入错误重新输入
+while True:
+        year_int = int(input('请输入年份：'))
+        if year_int < 1984 or year_int > int(yearDate):
+            print('您输入的年份有误，请重新输入')
+        else:
+            break
+
+# 输入月份，2月特殊，输入错误重新输入，如果小于10 返回0x
+
+while True:
+        month_int = int(input('请输入月份：'))
+        if month_int in range(1, 13):
             break
         else:
-            print('输入错误，请重新输入')
-# 判断月份
-def month():
-    while True:
-        month = int(input('请输入月份：'))
-        if month in range(1, 13):
-            if month < 10:
-                return ('0' + str(month))
+            print('月份有误，请重新输入！')
+
+# 判断日期，闰年的2月有29天 其他为28天。是否在合理范围内输入错误重新输入，小于10返回0x
+
+while True:
+    day_int = int(input('请输入日期：'))
+    if day_int < 1:
+        print('输入日期有误')
+        continue
+    if month_int == 2:
+        if (year_int % 4 == 0 and year_int % 100 != 0 ) or year_int % 400 == 0:
+            if day_int > 29:
+                print('您输入%d是闰年，2月只有29天，请重新输入！' % year_int)
             else:
-                return month
-            break
+                break
         else:
-            print('您输入错误，请重新输入月份')
-
-# 判断日期
-def day():
-    while True:
-        day_int = int(input('请输入日期：'))
-        if day_int in range(1, 32):
-            if day_int < 10:
-                return ('0' + str(day_int))
+            if day_int > 28:
+                print('您输入%d不是闰年，2月只有28天，请重新输入！' % year_int)
             else:
-                return day_int
-            break
+                break
+    elif month_int in (4, 6, 9, 11):
+        if day_int > 30:
+            print('输入的日期有误')
         else:
-            print('您输入错误，请重新输入日期')
-
-
-
-
-
+            break
+    else:
+        if day_int > 31:
+            print('输入日期有误')
+        else:
+            break
 
 
