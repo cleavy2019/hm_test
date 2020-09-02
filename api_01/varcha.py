@@ -122,4 +122,3 @@ print(ID_17+CheckCode[checkNum])
 # TODO 随机生成10个固定日期的身份证
 
 
-
