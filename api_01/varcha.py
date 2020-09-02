@@ -1,13 +1,22 @@
 import time
 import random
-
+import re
+# 查看系统时间，身份证不能生成大于当前时间
 timeDate = time.time()
 yearDate = time.strftime("%Y", time.localtime(timeDate))
 
+# 随机生成身份证前6位
 
+with open('id_card.txt', 'r', encoding='utf-8')as f:
+    text = f.read()
+    #print(text)
 
-first_six = '610524'
+# 处理文本中的数字
+text1 = re.findall('\d+', text)
+# print(text1)
 
+random_id = text1[random.randint(1, len(text1))]
+ # print(random_id)
 
 # 输入年份，并判断是否是闰年，并且从1984年开始到现在，输入错误重新输入
 while True:
@@ -73,25 +82,46 @@ birthday = y + m + d
 
 #  第15--17位数字
 k = []
+
 for i in range(2):
     j = str(random.randint(0, 9))
     k.append(j)
-fale = int(input('请输入性别：1.女  2.男'))
-if fale == 2:
-    m = str(random.randrange(1, 9, 2))
-else:
+
+# 第17位数字 偶数给女性  奇数给男性
+
+fale = input('请输入性别：1.男  2.女')
+if int(fale) % 2 == 0:
     m = str(random.randrange(0, 8, 2))
+else:
+    m = str(random.randrange(1, 9, 2))
 #print(m)
 
 random_str = ("".join(k) + str(m))
-print(random_str)
+# print(random_str)
 
-ID_17 = first_six + birthday + random_str
+ID_17 = random_id + birthday + random_str
 
-print(ID_17)
-# TODO 第18位填写
+#print(ID_17)
+#  第18位填写
+
+# 系数
+list = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+
+count = 0
+for i in range(17):
+    count += int(ID_17[i]) * list[i]
+
+checkNum = count % 11
+
+# 校验码
+CheckCode = ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"]
+
+print(ID_17+CheckCode[checkNum])
 
 
+# TODO 随机生成10个固定日期的身份证
 
-
+# 取10个前6位数字
+for i in range(10):
+    random_id = text1[random.randint(1, len(text1))]
 
