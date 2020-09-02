@@ -70,7 +70,7 @@ else:
 #print(m)
 
 random_str = ("".join(k)+ str(m))
-
+print(random_str)
 
 # TODO 第18位填写
 
