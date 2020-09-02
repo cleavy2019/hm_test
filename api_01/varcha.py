@@ -121,7 +121,5 @@ print(ID_17+CheckCode[checkNum])
 
 # TODO 随机生成10个固定日期的身份证
 
-# 取10个前6位数字
-for i in range(10):
-    random_id = text1[random.randint(1, len(text1))]
+
 
