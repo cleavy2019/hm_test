@@ -8,7 +8,7 @@ yearDate = time.strftime("%Y", time.localtime(timeDate))
 
 # 输入年份，并判断是否是闰年，并且从1984年开始到现在，输入错误重新输入
 while True:
-    y = input('请输入年份：')
+    y = input('请输入年份(1984-现在）：')
     if int(y) < 1984 or int(y) > int(yearDate):
         print('您输入的年份有误，请重新输入')
     else:
@@ -96,31 +96,40 @@ def hou_san(a):
 # 前17位数字
 def fifth_seven(a,b,c):
     return (qian_six()+ tw(a) + tw(b) + tw(c) + hou_san(fale))
-
 #  第18位填写
 
 
 def hou_one():
 # 系数
-    list = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
 
-    count = 0
-    for n in range(17):
-        count += int(fifth_seven(y,m,d)) * list[n]
+    xishu = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+    str = fifth_seven(y, m, d)
+    list1 = list(str)
+    numbers = list(map(int, list1))
+    print(numbers)
+    func = lambda x, y: x*y
+    result = map(func, xishu, numbers)
+    list_result = list(result)
+    print(sum(list_result))
 
-    checkNum = count % 11
 
-    # 校验码
+    checkNum = sum(list_result) % 11
+    print(checkNum)
+
+    # TODO 校验码重新计算
     CheckCode = ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"]
 
-    return (CheckCode[checkNum])
+    return CheckCode[checkNum]
 
 
-for i in range(num):
-    six = qian_six()
-    birthday = y + tw(m) + tw(d)
-    fifth = hou_san(int(fale))
-    last = hou_one()
-    print(six + birthday + fifth + last)
+
+six = qian_six()
+birthday = y + tw(m) + tw(d)
+fifth = hou_san(int(fale))
+last = hou_one()
+
+print(six + birthday + fifth + last)
+
+
 
 
