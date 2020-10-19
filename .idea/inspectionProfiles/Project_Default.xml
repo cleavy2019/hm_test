@@ -5,6 +5,8 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="shopping" />
+          <option value="hm_27" />
+          <option value="hm_27_测试模块1" />
         </list>
       </option>
     </inspection_tool>
